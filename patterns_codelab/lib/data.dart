@@ -31,7 +31,7 @@ class Document {
     }
   }
 
-  List<Block> getBlock() {
+  List<Block> getBlocks() {
     if (_json case {'blocks': List blocksJson}) {
       return <Block>[
         for (var blockJson in blocksJson) Block.fromJson(blockJson)
