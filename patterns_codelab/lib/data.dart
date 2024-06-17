@@ -30,6 +30,30 @@ class Document {
       throw const FormatException('Unexpected JSON');
     }
   }
+
+  List<Block> getBlock() {
+    if (_json case {'blocks': List blocksJson}) {
+      return <Block>[
+        for (var blockJson in blocksJson) Block.fromJson(blockJson)
+      ];
+    } else {
+      throw const FormatException('Unexpected JSON format');
+    }
+  }
+}
+
+class Block {
+  final String type;
+  final String text;
+  Block(this.type, this.text);
+
+  factory Block.fromJson(Map<String, dynamic> json) {
+    if (json case {'type': var type, 'text': var text}) {
+      return Block(type, text);
+    } else {
+      throw const FormatException('Unexpected JSON format');
+    }
+  }
 }
 
 const documentJson = '''
